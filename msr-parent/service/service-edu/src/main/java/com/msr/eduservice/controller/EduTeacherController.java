@@ -6,7 +6,6 @@ import com.msr.commonutils.R;
 import com.msr.eduservice.entity.EduTeacher;
 import com.msr.eduservice.query.TeacherQuery;
 import com.msr.eduservice.service.EduTeacherService;
-import com.msr.servicebase.exception.MSRException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -38,15 +37,14 @@ public class EduTeacherController {
     @ApiOperation(value = "所有讲师列表")
     @GetMapping
     public R list(){
-        try {
+        /*try {
             int a = 10/0;//出现异常,通过演示不难发现，返回的错误结构跟项目中的返回结构不一致
         } catch (MSRException e) {
             //抛出自定义异常
             throw new MSRException(20002,"自定义异常！！！");
-        }
-
-
+        }*/
         List<EduTeacher> list = teacherService.list(null);
+        System.out.println(list);
         return R.ok().data("item",list);
     }
 
