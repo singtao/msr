@@ -52,12 +52,19 @@ public class EduTeacherController {
      * 根据id删除指定的讲师
      */
     @ApiOperation(value = "根据ID删除讲师")
-    @DeleteMapping("{id}")
+    @DeleteMapping("{id}")//1
     public R removeById(
             @ApiParam(name = "id", value = "讲师ID", required = true)
             @PathVariable String id){
-        boolean flag = teacherService.removeById(id);
-        return R.ok();
+        //有可能后端删除失败
+        //当删除时受影响的行数大于0并用flag的值不为null时，则说明
+        //删除成功
+        boolean result = teacherService.removeById(id);
+        if(result){
+            return R.ok();
+        }else{
+            return R.error().message("删除失败");
+        }
     }
 
 
@@ -74,6 +81,7 @@ public class EduTeacherController {
                     TeacherQuery teacherQuery
             ){
 
+        System.out.println("name:"+teacherQuery.getName());
         Page<EduTeacher> pageParam = new Page<>(page, limit);
 
         //teacherService.page(pageParam, null);
@@ -86,10 +94,11 @@ public class EduTeacherController {
     }
 
     @ApiOperation(value = "新增讲师")
-    @PostMapping
+    @PostMapping("save")
     public R save(
             @ApiParam(name = "teacher", value = "讲师对象", required = true)
             @RequestBody EduTeacher teacher){
+        System.out.println("-----------------");
         teacherService.save(teacher);
         return R.ok();
     }

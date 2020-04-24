@@ -25,6 +25,7 @@ public enum ResultCodeEnum {
 	FETCH_USER_INFO_ERROR(false, 23004, "获取微信用户信息错误");
 
 
+
 	private Boolean success;//响应是否成功
 	private Integer code;//返回码
 	private String message;//返回消息
