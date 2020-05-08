@@ -1,4 +1,4 @@
-package com.msr.servicebase.config;
+package com.msr.shop.config;
 
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
@@ -13,26 +13,25 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {
+public class Swagger2Config {
     @Bean
-    public Docket webApiConfig(){
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("webApi")
-                .apiInfo(webApiInfo())
-                .select()
-                //.paths(Predicates.not(PathSelectors.regex("/admin/.*")))
-                .paths(Predicates.not(PathSelectors.regex("/error.*")))
-                .build();
+    public Docket adminApiConfig(){
 
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("adminApi")
+                .apiInfo(adminApiInfo())
+                .select()
+                .paths(Predicates.and(PathSelectors.regex("/admin/.*")))
+                .build();
     }
 
-    private ApiInfo webApiInfo(){
+    private ApiInfo adminApiInfo(){
 
         return new ApiInfoBuilder()
-                .title("网站-课程中心API文档")
-                .description("本文档描述了课程中心微服务接口定义")
+                .title("后台管理系统-商品中心API文档")
+                .description("本文档描述了后台管理系统商品中心微服务接口定义")
                 .version("1.0")
-                .contact(new Contact("tom", "https://e-msr.co.jp/", "407475284@qq.com"))
+                .contact(new Contact("Helen", "http://atguigu.com", "55317332@qq.com"))
                 .build();
     }
 }
